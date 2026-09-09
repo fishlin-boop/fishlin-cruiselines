@@ -37,8 +37,9 @@
             color: var(--blue-200);
             text-align: center;
             font-size: 12px;
-            padding: 6px;
+            padding: 8px;
             letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         /* Header & Navigation */
@@ -53,6 +54,8 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
@@ -62,12 +65,18 @@
             color: var(--white);
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         nav a {
             color: var(--blue-200);
             text-decoration: none;
-            margin-left: 25px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             transition: color 0.2s;
             cursor: pointer;
         }
@@ -75,6 +84,32 @@
         nav a:hover, nav a.active {
             color: var(--white);
             text-decoration: underline;
+        }
+
+        /* Audio Toggle Widget */
+        .audio-widget {
+            background-color: var(--blue-700);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--white);
+        }
+
+        .audio-widget button {
+            background: var(--blue-500);
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .audio-widget button:hover {
+            background: var(--blue-600);
         }
 
         /* Main Content Pages */
@@ -115,7 +150,7 @@
             height: auto;
             z-index: 1;
             object-fit: cover;
-            filter: brightness(0.6) hue-rotate(180deg); /* Shifts tones toward deep blue */
+            filter: brightness(0.6) hue-rotate(180deg);
         }
 
         .hero-overlay {
@@ -198,7 +233,6 @@
             overflow: hidden;
             box-shadow: 0 6px 15px rgba(0, 119, 182, 0.1);
             border-top: 5px solid var(--blue-600);
-            padding: 25px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -207,6 +241,21 @@
 
         .card:hover {
             transform: translateY(-4px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--blue-200);
+        }
+
+        .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
         }
 
         .card h3 {
@@ -239,7 +288,55 @@
             margin-bottom: 10px;
         }
 
-        /* Reservation Form Styles */
+        /* Info Boxes & Rules */
+        .info-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(3, 4, 94, 0.1);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--blue-700);
+        }
+
+        .info-box h3 {
+            color: var(--blue-800);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            color: var(--blue-700);
+        }
+
+        .info-box li {
+            margin-bottom: 10px;
+        }
+
+        /* Reviews Styles */
+        .review-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--blue-500);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--blue-900);
+        }
+
+        .review-rating {
+            color: var(--blue-700);
+            font-size: 14px;
+        }
+
+        /* Reservation & Review Forms */
         .form-container {
             background: var(--white);
             max-width: 700px;
@@ -261,7 +358,7 @@
             color: var(--blue-800);
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid var(--blue-300);
@@ -271,7 +368,7 @@
             background-color: var(--blue-100);
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--blue-600);
             background-color: var(--white);
@@ -357,19 +454,31 @@
 </head>
 <body>
 
+    <!-- Background Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="disclaimer-banner">
-        ⚠️ SIDENOTE: This is a completely fake cruise line website created for a fictional aviation and travel simulation game.
+        NOTICE: This is a completely fictional cruise line website created for a simulation game network. All bookings and tickets are virtual.
     </div>
 
     <header>
-        <div class="logo">🐟 Fishlin Cruiselines</div>
+        <div class="logo">Fishlin Cruiselines</div>
         <nav>
             <a onclick="switchTab('home')" class="active" id="nav-home">Home</a>
             <a onclick="switchTab('suites')" id="nav-suites">Suites & Fleet</a>
             <a onclick="switchTab('fun')" id="nav-fun">Fun On Board</a>
+            <a onclick="switchTab('breakfast')" id="nav-breakfast">Breakfast Menu</a>
+            <a onclick="switchTab('tickets')" id="nav-tickets">Tickets & Rules</a>
+            <a onclick="switchTab('reviews')" id="nav-reviews">Reviews</a>
             <a onclick="switchTab('reservations')" id="nav-reservations">Reservations</a>
             <a onclick="switchTab('admin')" id="nav-admin">Admin Panel</a>
         </nav>
+        <div class="audio-widget">
+            <span>Lounge Music:</span>
+            <button id="audioToggleBtn" onclick="toggleAudio()">Play</button>
+        </div>
     </header>
 
     <!-- HOME TAB -->
@@ -381,8 +490,8 @@
             </video>
             <div class="hero-overlay"></div>
             <div class="hero-content">
-                <h1>Sail the Fin-tastic Seas</h1>
-                <p>Experience deep blue luxury, smooth water cruising, and unmatched onboard entertainment tailored for your virtual airline and travel network.</p>
+                <h1>Sail the Fin-Tastic Seas</h1>
+                <p>Experience deep blue luxury, smooth water cruising, and unmatched onboard entertainment tailored for your virtual travel network.</p>
                 <a onclick="switchTab('reservations')" class="btn">Book Your Voyage</a>
             </div>
         </div>
@@ -392,104 +501,131 @@
         
         <div class="grid">
             <div class="card">
-                <div>
-                    <h3>Deep Blue Luxury</h3>
-                    <p>Every ship in our fleet is styled in immaculate shades of deep ocean blue, offering a serene, calming environment from bow to stern.</p>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8482812208935772946_0" alt="Fleet Ship" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <h3>Deep Blue Luxury Fleet</h3>
+                        <p>Every ship in our fleet is styled in immaculate shades of deep ocean blue, offering a serene environment from bow to stern.</p>
+                    </div>
+                    <a onclick="switchTab('suites')" class="btn" style="text-align: center;">View Suites</a>
                 </div>
-                <a onclick="switchTab('suites')" class="btn" style="text-align: center;">View Suites</a>
             </div>
             <div class="card">
-                <div>
-                    <h3>Endless Onboard Fun</h3>
-                    <p>From towering water slides to evening aquatic shows, your simulated vacation never slows down.</p>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8482812208935772946_1" alt="Cruise Fun" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <h3>Endless Onboard Fun</h3>
+                        <p>From towering water slides to evening aquatic shows, your simulated vacation never slows down.</p>
+                    </div>
+                    <a onclick="switchTab('fun')" class="btn" style="text-align: center;">Explore Activities</a>
                 </div>
-                <a onclick="switchTab('fun')" class="btn" style="text-align: center;">Explore Activities</a>
             </div>
             <div class="card">
-                <div>
-                    <h3>Instant Simulation Booking</h3>
-                    <p>Connect seamlessly with your airline network schedules using our fast live reservation tracker.</p>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8482812208935772946_2" alt="Dining Experience" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <h3>Premium Dining & Breakfast</h3>
+                        <p>Explore gourmet breakfast menus, kid-friendly stations, and world-class dining facilities across all decks.</p>
+                    </div>
+                    <a onclick="switchTab('breakfast')" class="btn" style="text-align: center;">View Breakfast Menu</a>
                 </div>
-                <a onclick="switchTab('reservations')" class="btn" style="text-align: center;">Make Reservation</a>
             </div>
         </div>
     </div>
 
-    <!-- SUITES TAB -->
+    <!-- SUITES & FLEET TAB -->
     <div id="suites" class="page-section">
         <h2 class="section-title">Our Stateroom Fleet</h2>
-        <p class="section-subtitle">Choose from our curated collection of blue-themed private quarters.</p>
+        <p class="section-subtitle">Choose from our curated collection of blue-themed private quarters. Nothing is free aboard our ships, and all suite bookings include premium access privileges.</p>
 
         <div class="grid">
             <div class="card">
-                <div>
-                    <span class="badge">Lowest Pricing</span>
-                    <h3>Baby-Care Suite</h3>
-                    <p>Specially outfitted with strollers, portable cribs, bottle warmers, and baby-safe corner bumpers so parents can relax completely.</p>
-                </div>
-                <div>
-                    <div class="price-tag">$450 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Baby Suite</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <span class="badge">Solo Traveler</span>
-                    <h3>Single Suite</h3>
-                    <p>Compact, highly efficient, and cozy. Perfect for individual travelers hopping between virtual islands and flight hubs.</p>
-                </div>
-                <div>
-                    <div class="price-tag">$600 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Single Suite</a>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7153748189364191357_0" alt="Baby Care Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Lowest Pricing</span>
+                        <h3>Baby-Care Suite</h3>
+                        <p>Specially outfitted with strollers, portable cribs, bottle warmers, and baby-safe corner bumpers so parents can relax completely.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$450 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Baby Suite</a>
+                    </div>
                 </div>
             </div>
 
             <div class="card">
-                <div>
-                    <span class="badge">Popular Choice</span>
-                    <h3>Family Suite</h3>
-                    <p>Spacious multi-room layouts featuring ocean-view balconies and extra sleeping quarters to comfortably house the whole crew.</p>
-                </div>
-                <div>
-                    <div class="price-tag">$950 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Family Suite</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <span class="badge">High Entertainment</span>
-                    <h3>Family Fun Suite</h3>
-                    <p>Loaded with built-in arcade consoles, board game stations, and direct access to the upper deck water park slides.</p>
-                </div>
-                <div>
-                    <div class="price-tag">$1,200 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Fun Suite</a>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7153748189364191357_1" alt="Single Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Solo Traveler</span>
+                        <h3>Single Suite</h3>
+                        <p>Compact, highly efficient, and cozy. Perfect for individual travelers hopping between virtual islands and flight hubs.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$600 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Single Suite</a>
+                    </div>
                 </div>
             </div>
 
             <div class="card">
-                <div>
-                    <span class="badge">Trendy & Modern</span>
-                    <h3>Cool Suite</h3>
-                    <p>Sleek metallic blue finishes, smart lighting control, integrated sound systems, and a private mini-bar lounge space.</p>
-                </div>
-                <div>
-                    <div class="price-tag">$1,500 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Cool Suite</a>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7153748189364191357_2" alt="Family Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Popular Choice</span>
+                        <h3>Family Suite</h3>
+                        <p>Spacious multi-room layouts featuring ocean-view balconies and extra sleeping quarters to comfortably house the whole crew.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$950 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Family Suite</a>
+                    </div>
                 </div>
             </div>
 
             <div class="card">
-                <div>
-                    <span class="badge">Ultimate Luxury</span>
-                    <h3>Deluxe Suite</h3>
-                    <p>The pinnacle of Fishlin Cruiselines. Wrap-around sun deck, private jacuzzi, 24-hour butler service, and premium panoramic sea views.</p>
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7153748189364191357_3" alt="Family Fun Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">High Entertainment</span>
+                        <h3>Family Fun Suite</h3>
+                        <p>Loaded with built-in arcade consoles, board game stations, and direct access to the upper deck water park slides.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$1,200 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Fun Suite</a>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-tag">$2,400 / voyage</div>
-                    <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Deluxe Suite</a>
+            </div>
+
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/8482812208935772946_3" alt="Cool Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Trendy & Modern</span>
+                        <h3>Cool Suite</h3>
+                        <p>Sleek metallic blue finishes, smart lighting control, integrated sound systems, and a private mini-bar lounge space.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$1,500 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Cool Suite</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/7153748189364191357_0" alt="Deluxe Suite" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Ultimate Luxury</span>
+                        <h3>Deluxe Suite</h3>
+                        <p>The pinnacle of Fishlin Cruiselines. Wrap-around sun deck, private jacuzzi, 24-hour butler service, and premium panoramic sea views.</p>
+                    </div>
+                    <div>
+                        <div class="price-tag">$2,400 / voyage</div>
+                        <a onclick="switchTab('reservations')" class="btn" style="width: 100%; text-align: center;">Book Deluxe Suite</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -502,28 +638,186 @@
 
         <div class="grid">
             <div class="card">
-                <h3>The Blue Abyss Water Slide</h3>
-                <p>A 4-story translucent blue tube slide that loops over the side of the ship, offering a breathtaking look straight down at the ocean water.</p>
+                <div class="card-body">
+                    <h3>The Blue Abyss Water Slide</h3>
+                    <p>A 4-story translucent blue tube slide that loops over the side of the ship, offering a breathtaking look straight down at the ocean water.</p>
+                    <div class="price-tag">Access: $25 / Day Pass</div>
+                </div>
             </div>
             <div class="card">
-                <h3>Neptune's Infinity Pools</h3>
-                <p>Multiple temperature-controlled pools stacked across tiered decks, complete with underwater swim-up blue-mocktail bars.</p>
+                <div class="card-body">
+                    <h3>Neptune's Infinity Pools</h3>
+                    <p>Multiple temperature-controlled pools stacked across tiered decks, complete with underwater swim-up blue-mocktail bars.</p>
+                    <div class="price-tag">Access: Included with Suite</div>
+                </div>
             </div>
             <div class="card">
-                <h3>Deep Sea Kids Club</h3>
-                <p>Supervised interactive zones featuring marine-themed video games, arts and crafts, and scavenger hunts across the ship.</p>
+                <div class="card-body">
+                    <h3>Deep Sea Kids Club</h3>
+                    <p>Supervised interactive zones featuring marine-themed video games, arts and crafts, and scavenger hunts across the ship.</p>
+                    <div class="price-tag">Access: $40 / Session</div>
+                </div>
             </div>
             <div class="card">
-                <h3>Midnight Blue Gala & Shows</h3>
-                <p>World-class theatrical performances, laser light shows over the water, and live acoustic music under the starlit sky every single night.</p>
+                <div class="card-body">
+                    <h3>Midnight Blue Gala & Shows</h3>
+                    <p>World-class theatrical performances, laser light shows over the water, and live acoustic music under the starlit sky every single night.</p>
+                    <div class="price-tag">Access: $50 / Ticket</div>
+                </div>
             </div>
             <div class="card">
-                <h3>Aqua Spa & Wellness</h3>
-                <p>Relaxing blue-clay massages, steam rooms, and panoramic quiet zones designed to melt away all travel stress.</p>
+                <div class="card-body">
+                    <h3>Aqua Spa & Wellness</h3>
+                    <p>Relaxing blue-clay massages, steam rooms, and panoramic quiet zones designed to melt away all travel stress.</p>
+                    <div class="price-tag">Access: $120 / Treatment</div>
+                </div>
             </div>
             <div class="card">
-                <h3>The Fin-Tastic Arcade</h3>
-                <p>State-of-the-art virtual reality flight and sailing simulators so you can practice your routing skills while at sea.</p>
+                <div class="card-body">
+                    <h3>The Fin-Tastic Arcade</h3>
+                    <p>State-of-the-art virtual reality flight and sailing simulators so you can practice your routing skills while at sea.</p>
+                    <div class="price-tag">Access: Pay-per-play ($5 token)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BREAKFAST MENU TAB -->
+    <div id="breakfast" class="page-section">
+        <h2 class="section-title">Onboard Breakfast Menu</h2>
+        <p class="section-subtitle">Start your morning right. Premium gourmet breakfast dishes and kid-friendly favorites served daily at the main deck dining hall.</p>
+
+        <div class="grid">
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1457100136314986681_0" alt="Captain Breakfast" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Chef Special</span>
+                        <h3>The Captain's Blue Horizon Feast</h3>
+                        <p>Fluffy blueberry pancakes, smoked salmon benedict, artisan sourdough toast, fresh berries, and premium roasted coffee.</p>
+                    </div>
+                    <div class="price-tag">$24.99</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1457100136314986681_1" alt="Ocean Sunrise Breakfast" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Classic Choice</span>
+                        <h3>Ocean Sunrise Platter</h3>
+                        <p>Two farm-fresh eggs cooked to order, crispy bacon, maple sausage links, breakfast potatoes, and buttered toast.</p>
+                    </div>
+                    <div class="price-tag">$18.50</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1457100136314986681_2" alt="Kid Friendly Breakfast" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Kid Friendly</span>
+                        <h3>Anchor Waffle Stack</h3>
+                        <p>Golden anchor-shaped waffles topped with whipped cream, chocolate chips, and maple syrup, served with a glass of cold milk.</p>
+                    </div>
+                    <div class="price-tag">$12.00</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1457100136314986681_3" alt="Healthy Fruit Bowl" class="card-img">
+                <div class="card-body">
+                    <div>
+                        <span class="badge">Kid Friendly & Healthy</span>
+                        <h3>Sailor's Fruit and Yogurt Parfait</h3>
+                        <p>Layered Greek vanilla yogurt with crunchy granola, fresh strawberries, bananas, and a side of mini blueberry muffins.</p>
+                    </div>
+                    <div class="price-tag">$10.50</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TICKETS & RULES TAB -->
+    <div id="tickets" class="page-section">
+        <h2 class="section-title">Tickets & Onboard Rules</h2>
+        <p class="section-subtitle">Important information regarding ticket processing, boarding, and code of conduct.</p>
+
+        <div class="info-box">
+            <h3>How Tickets and Boarding Work</h3>
+            <ul>
+                <li><strong>Booking Confirmation:</strong> Once you complete a reservation, you receive a unique booking reference code (e.g., #FC-XXXX).</li>
+                <li><strong>Virtual Boarding Passes:</strong> Boarding passes are issued at the virtual port terminal desk 2 hours before departure time.</li>
+                <li><strong>All-Inclusive vs. Pay-Per-Use:</strong> Suite reservations cover your stateroom and basic lodging. Dining, spa treatments, arcade tokens, and special event passes require separate purchases or onboard account billing.</li>
+                <li><strong>Network Integration:</strong> Tickets link directly with partner virtual airlines and hotel networks for seamless travel itineraries.</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>Fishlin Cruiselines Safety & Conduct Rules</h3>
+            <ul>
+                <li><strong>Life Jacket Drill:</strong> All passengers must participate in the mandatory virtual safety briefing prior to ship departure.</li>
+                <li><strong>Deck Etiquette:</strong> Running is strictly prohibited on the pool decks. Proper footwear must be worn in all dining areas.</li>
+                <li><strong>Quiet Hours:</strong> Quiet hours are enforced across all stateroom corridors starting at 11:00 PM nightly.</li>
+                <li><strong>Simulation Code:</strong> Respect fellow virtual travelers and crew members. Exploits or disruptive behavior in simulation areas will result in immediate disembarkation.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- REVIEWS TAB -->
+    <div id="reviews" class="page-section">
+        <h2 class="section-title">Passenger Reviews</h2>
+        <p class="section-subtitle">See what fellow virtual travelers are saying about their voyage with Fishlin Cruiselines.</p>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="review-card">
+                <div class="review-header">
+                    <span>Captain Alex (Virtual Airline CEO)</span>
+                    <span class="review-rating">Rating: 5/5 Stars</span>
+                </div>
+                <p>The connection between our flight network and Fishlin Cruiselines is flawless. The Deluxe Suite was exceptionally detailed, and the breakfast menu was top tier.</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <span>AirBusPilot99</span>
+                    <span class="review-rating">Rating: 5/5 Stars</span>
+                </div>
+                <p>Booked the Baby-Care Suite for our family simulation trip. Having the baby items ready made the voyage stress-free. Highly recommended!</p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <span>SkyHighBro</span>
+                    <span class="review-rating">Rating: 4.5/5 Stars</span>
+                </div>
+                <p>The Cool Suite is amazing. Fast booking, great admin panel tools, and the water slides are epic. Can't wait for the next route update.</p>
+            </div>
+
+            <!-- Review Submission Form -->
+            <div class="form-container" style="margin-top: 40px;">
+                <h3 style="color: var(--blue-800); margin-bottom: 20px; text-align: center;">Leave a Review</h3>
+                <form id="reviewForm" onsubmit="handleReview(event)">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name / Handle</label>
+                        <input type="text" id="reviewerName" placeholder="e.g. First Officer Sam" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <select id="reviewRating" required>
+                            <option value="5/5 Stars">5/5 Stars - Excellent</option>
+                            <option value="4/5 Stars">4/5 Stars - Very Good</option>
+                            <option value="3/5 Stars">3/5 Stars - Average</option>
+                            <option value="2/5 Stars">2/5 Stars - Needs Improvement</option>
+                            <option value="1/5 Stars">1/5 Stars - Poor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Experience</label>
+                        <textarea id="reviewText" rows="4" placeholder="Write your review here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Submit Review</button>
+                </form>
             </div>
         </div>
     </div>
@@ -632,7 +926,24 @@
     </footer>
 
     <script>
-        // Simple tab switching logic
+        // Audio Toggle Logic
+        const bgMusic = document.getElementById('bgMusic');
+        const audioToggleBtn = document.getElementById('audioToggleBtn');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+                audioToggleBtn.innerText = 'Play';
+                isPlaying = false;
+            } else {
+                bgMusic.play().catch(e => console.log("Audio play blocked by browser policy"));
+                audioToggleBtn.innerText = 'Pause';
+                isPlaying = true;
+            }
+        }
+
+        // Tab Switching Logic
         function switchTab(tabId) {
             const sections = document.querySelectorAll('.page-section');
             sections.forEach(sec => sec.classList.remove('active'));
@@ -675,9 +986,34 @@
 
             alert(`Reservation successful! Your booking reference is ${randomId}. Check the Admin Panel to view your manifest entry.`);
             
-            // Reset form and switch to admin view or home
             document.getElementById('bookingForm').reset();
             switchTab('admin');
+        }
+
+        // Handle review submission dynamically
+        function handleReview(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('reviewerName').value;
+            const rating = document.getElementById('reviewRating').value;
+            const text = document.getElementById('reviewText').value;
+
+            const reviewContainer = document.querySelector('#reviews > div');
+            const newReview = document.createElement('div');
+            newReview.className = 'review-card';
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <span>${name}</span>
+                    <span class="review-rating">Rating: ${rating}</span>
+                </div>
+                <p>${text}</p>
+            `;
+
+            // Insert before the form container
+            reviewContainer.insertBefore(newReview, document.getElementById('reviewForm').parentElement);
+
+            alert('Thank you for your review! It has been successfully posted.');
+            document.getElementById('reviewForm').reset();
         }
     </script>
 
